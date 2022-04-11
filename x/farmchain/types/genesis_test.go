@@ -19,12 +19,38 @@ func TestGenesisState_Validate(t *testing.T) {
 			valid:    true,
 		},
 		{
-			desc:     "valid genesis state",
+			desc: "valid genesis state",
 			genState: &types.GenesisState{
 
+				LocationDataList: []types.LocationData{
+					{
+						Timestamp: "0",
+						Location:  "0",
+					},
+					{
+						Timestamp: "1",
+						Location:  "1",
+					},
+				},
 				// this line is used by starport scaffolding # types/genesis/validField
 			},
 			valid: true,
+		},
+		{
+			desc: "duplicated locationData",
+			genState: &types.GenesisState{
+				LocationDataList: []types.LocationData{
+					{
+						Timestamp: "0",
+						Location:  "0",
+					},
+					{
+						Timestamp: "0",
+						Location:  "0",
+					},
+				},
+			},
+			valid: false,
 		},
 		// this line is used by starport scaffolding # types/genesis/testcase
 	} {

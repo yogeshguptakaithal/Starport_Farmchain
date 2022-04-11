@@ -14,6 +14,16 @@ func TestGenesis(t *testing.T) {
 	genesisState := types.GenesisState{
 		Params: types.DefaultParams(),
 
+		LocationDataList: []types.LocationData{
+			{
+				Timestamp: "0",
+				Location:  "0",
+			},
+			{
+				Timestamp: "1",
+				Location:  "1",
+			},
+		},
 		// this line is used by starport scaffolding # genesis/test/state
 	}
 
@@ -25,5 +35,6 @@ func TestGenesis(t *testing.T) {
 	nullify.Fill(&genesisState)
 	nullify.Fill(got)
 
+	require.ElementsMatch(t, genesisState.LocationDataList, got.LocationDataList)
 	// this line is used by starport scaffolding # genesis/test/assert
 }

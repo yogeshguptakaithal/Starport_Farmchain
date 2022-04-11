@@ -1,0 +1,16 @@
+syntax = "proto3";
+package cosmonaut.farmchain.farmchain;
+
+option go_package = "github.com/cosmonaut/farmchain/x/farmchain/types";
+
+message LocationData {
+  string timestamp = 1; 
+  string location = 2; 
+  string temperature = 3; 
+  string humidity = 4; 
+  string soilMoisture = 5; 
+  string growthPercentage = 6; 
+  string crop = 7; 
+  string creator = 8;
+}
+

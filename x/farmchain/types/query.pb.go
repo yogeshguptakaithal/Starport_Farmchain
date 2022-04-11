@@ -6,7 +6,7 @@ package types
 import (
 	context "context"
 	fmt "fmt"
-	_ "github.com/cosmos/cosmos-sdk/types/query"
+	query "github.com/cosmos/cosmos-sdk/types/query"
 	_ "github.com/gogo/protobuf/gogoproto"
 	grpc1 "github.com/gogo/protobuf/grpc"
 	proto "github.com/gogo/protobuf/proto"
@@ -113,34 +113,377 @@ func (m *QueryParamsResponse) GetParams() Params {
 	return Params{}
 }
 
+type QueryGetLocationDataRequest struct {
+	Timestamp string `protobuf:"bytes,1,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
+	Location  string `protobuf:"bytes,2,opt,name=location,proto3" json:"location,omitempty"`
+}
+
+func (m *QueryGetLocationDataRequest) Reset()         { *m = QueryGetLocationDataRequest{} }
+func (m *QueryGetLocationDataRequest) String() string { return proto.CompactTextString(m) }
+func (*QueryGetLocationDataRequest) ProtoMessage()    {}
+func (*QueryGetLocationDataRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_0e324466b7ae1c37, []int{2}
+}
+func (m *QueryGetLocationDataRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryGetLocationDataRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryGetLocationDataRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryGetLocationDataRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryGetLocationDataRequest.Merge(m, src)
+}
+func (m *QueryGetLocationDataRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryGetLocationDataRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryGetLocationDataRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryGetLocationDataRequest proto.InternalMessageInfo
+
+func (m *QueryGetLocationDataRequest) GetTimestamp() string {
+	if m != nil {
+		return m.Timestamp
+	}
+	return ""
+}
+
+func (m *QueryGetLocationDataRequest) GetLocation() string {
+	if m != nil {
+		return m.Location
+	}
+	return ""
+}
+
+type QueryGetLocationDataResponse struct {
+	LocationData LocationData `protobuf:"bytes,1,opt,name=locationData,proto3" json:"locationData"`
+}
+
+func (m *QueryGetLocationDataResponse) Reset()         { *m = QueryGetLocationDataResponse{} }
+func (m *QueryGetLocationDataResponse) String() string { return proto.CompactTextString(m) }
+func (*QueryGetLocationDataResponse) ProtoMessage()    {}
+func (*QueryGetLocationDataResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_0e324466b7ae1c37, []int{3}
+}
+func (m *QueryGetLocationDataResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryGetLocationDataResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryGetLocationDataResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryGetLocationDataResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryGetLocationDataResponse.Merge(m, src)
+}
+func (m *QueryGetLocationDataResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryGetLocationDataResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryGetLocationDataResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryGetLocationDataResponse proto.InternalMessageInfo
+
+func (m *QueryGetLocationDataResponse) GetLocationData() LocationData {
+	if m != nil {
+		return m.LocationData
+	}
+	return LocationData{}
+}
+
+type QueryAllLocationDataRequest struct {
+	Pagination *query.PageRequest `protobuf:"bytes,1,opt,name=pagination,proto3" json:"pagination,omitempty"`
+}
+
+func (m *QueryAllLocationDataRequest) Reset()         { *m = QueryAllLocationDataRequest{} }
+func (m *QueryAllLocationDataRequest) String() string { return proto.CompactTextString(m) }
+func (*QueryAllLocationDataRequest) ProtoMessage()    {}
+func (*QueryAllLocationDataRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_0e324466b7ae1c37, []int{4}
+}
+func (m *QueryAllLocationDataRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryAllLocationDataRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryAllLocationDataRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryAllLocationDataRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryAllLocationDataRequest.Merge(m, src)
+}
+func (m *QueryAllLocationDataRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryAllLocationDataRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryAllLocationDataRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryAllLocationDataRequest proto.InternalMessageInfo
+
+func (m *QueryAllLocationDataRequest) GetPagination() *query.PageRequest {
+	if m != nil {
+		return m.Pagination
+	}
+	return nil
+}
+
+type QueryAllLocationDataResponse struct {
+	LocationData []LocationData      `protobuf:"bytes,1,rep,name=locationData,proto3" json:"locationData"`
+	Pagination   *query.PageResponse `protobuf:"bytes,2,opt,name=pagination,proto3" json:"pagination,omitempty"`
+}
+
+func (m *QueryAllLocationDataResponse) Reset()         { *m = QueryAllLocationDataResponse{} }
+func (m *QueryAllLocationDataResponse) String() string { return proto.CompactTextString(m) }
+func (*QueryAllLocationDataResponse) ProtoMessage()    {}
+func (*QueryAllLocationDataResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_0e324466b7ae1c37, []int{5}
+}
+func (m *QueryAllLocationDataResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryAllLocationDataResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryAllLocationDataResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryAllLocationDataResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryAllLocationDataResponse.Merge(m, src)
+}
+func (m *QueryAllLocationDataResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryAllLocationDataResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryAllLocationDataResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryAllLocationDataResponse proto.InternalMessageInfo
+
+func (m *QueryAllLocationDataResponse) GetLocationData() []LocationData {
+	if m != nil {
+		return m.LocationData
+	}
+	return nil
+}
+
+func (m *QueryAllLocationDataResponse) GetPagination() *query.PageResponse {
+	if m != nil {
+		return m.Pagination
+	}
+	return nil
+}
+
+type QueryGetLocationByDataRequest struct {
+	Timestamp        string `protobuf:"bytes,1,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
+	Crop             string `protobuf:"bytes,2,opt,name=crop,proto3" json:"crop,omitempty"`
+	Temperature      string `protobuf:"bytes,3,opt,name=temperature,proto3" json:"temperature,omitempty"`
+	Humidity         string `protobuf:"bytes,4,opt,name=humidity,proto3" json:"humidity,omitempty"`
+	SoilMoisture     string `protobuf:"bytes,5,opt,name=soilMoisture,proto3" json:"soilMoisture,omitempty"`
+	GrowthPercentage string `protobuf:"bytes,6,opt,name=growthPercentage,proto3" json:"growthPercentage,omitempty"`
+}
+
+func (m *QueryGetLocationByDataRequest) Reset()         { *m = QueryGetLocationByDataRequest{} }
+func (m *QueryGetLocationByDataRequest) String() string { return proto.CompactTextString(m) }
+func (*QueryGetLocationByDataRequest) ProtoMessage()    {}
+func (*QueryGetLocationByDataRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_0e324466b7ae1c37, []int{6}
+}
+func (m *QueryGetLocationByDataRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryGetLocationByDataRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryGetLocationByDataRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryGetLocationByDataRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryGetLocationByDataRequest.Merge(m, src)
+}
+func (m *QueryGetLocationByDataRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryGetLocationByDataRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryGetLocationByDataRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryGetLocationByDataRequest proto.InternalMessageInfo
+
+func (m *QueryGetLocationByDataRequest) GetTimestamp() string {
+	if m != nil {
+		return m.Timestamp
+	}
+	return ""
+}
+
+func (m *QueryGetLocationByDataRequest) GetCrop() string {
+	if m != nil {
+		return m.Crop
+	}
+	return ""
+}
+
+func (m *QueryGetLocationByDataRequest) GetTemperature() string {
+	if m != nil {
+		return m.Temperature
+	}
+	return ""
+}
+
+func (m *QueryGetLocationByDataRequest) GetHumidity() string {
+	if m != nil {
+		return m.Humidity
+	}
+	return ""
+}
+
+func (m *QueryGetLocationByDataRequest) GetSoilMoisture() string {
+	if m != nil {
+		return m.SoilMoisture
+	}
+	return ""
+}
+
+func (m *QueryGetLocationByDataRequest) GetGrowthPercentage() string {
+	if m != nil {
+		return m.GrowthPercentage
+	}
+	return ""
+}
+
+type QueryGetLocationByDataResponse struct {
+}
+
+func (m *QueryGetLocationByDataResponse) Reset()         { *m = QueryGetLocationByDataResponse{} }
+func (m *QueryGetLocationByDataResponse) String() string { return proto.CompactTextString(m) }
+func (*QueryGetLocationByDataResponse) ProtoMessage()    {}
+func (*QueryGetLocationByDataResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_0e324466b7ae1c37, []int{7}
+}
+func (m *QueryGetLocationByDataResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryGetLocationByDataResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryGetLocationByDataResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryGetLocationByDataResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryGetLocationByDataResponse.Merge(m, src)
+}
+func (m *QueryGetLocationByDataResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryGetLocationByDataResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryGetLocationByDataResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryGetLocationByDataResponse proto.InternalMessageInfo
+
 func init() {
 	proto.RegisterType((*QueryParamsRequest)(nil), "cosmonaut.farmchain.farmchain.QueryParamsRequest")
 	proto.RegisterType((*QueryParamsResponse)(nil), "cosmonaut.farmchain.farmchain.QueryParamsResponse")
+	proto.RegisterType((*QueryGetLocationDataRequest)(nil), "cosmonaut.farmchain.farmchain.QueryGetLocationDataRequest")
+	proto.RegisterType((*QueryGetLocationDataResponse)(nil), "cosmonaut.farmchain.farmchain.QueryGetLocationDataResponse")
+	proto.RegisterType((*QueryAllLocationDataRequest)(nil), "cosmonaut.farmchain.farmchain.QueryAllLocationDataRequest")
+	proto.RegisterType((*QueryAllLocationDataResponse)(nil), "cosmonaut.farmchain.farmchain.QueryAllLocationDataResponse")
+	proto.RegisterType((*QueryGetLocationByDataRequest)(nil), "cosmonaut.farmchain.farmchain.QueryGetLocationByDataRequest")
+	proto.RegisterType((*QueryGetLocationByDataResponse)(nil), "cosmonaut.farmchain.farmchain.QueryGetLocationByDataResponse")
 }
 
 func init() { proto.RegisterFile("farmchain/query.proto", fileDescriptor_0e324466b7ae1c37) }
 
 var fileDescriptor_0e324466b7ae1c37 = []byte{
-	// 302 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x12, 0x4d, 0x4b, 0x2c, 0xca,
-	0x4d, 0xce, 0x48, 0xcc, 0xcc, 0xd3, 0x2f, 0x2c, 0x4d, 0x2d, 0xaa, 0xd4, 0x2b, 0x28, 0xca, 0x2f,
-	0xc9, 0x17, 0x92, 0x4d, 0xce, 0x2f, 0xce, 0xcd, 0xcf, 0x4b, 0x2c, 0x2d, 0xd1, 0x83, 0x2b, 0x40,
-	0xb0, 0xa4, 0x44, 0xd2, 0xf3, 0xd3, 0xf3, 0xc1, 0x2a, 0xf5, 0x41, 0x2c, 0x88, 0x26, 0x29, 0x99,
-	0xf4, 0xfc, 0xfc, 0xf4, 0x9c, 0x54, 0xfd, 0xc4, 0x82, 0x4c, 0xfd, 0xc4, 0xbc, 0xbc, 0xfc, 0x92,
-	0xc4, 0x92, 0xcc, 0xfc, 0xbc, 0x62, 0xa8, 0xac, 0x16, 0xd8, 0xc8, 0x62, 0xfd, 0xa4, 0xc4, 0xe2,
-	0x54, 0x88, 0x5d, 0xfa, 0x65, 0x86, 0x49, 0xa9, 0x25, 0x89, 0x86, 0xfa, 0x05, 0x89, 0xe9, 0x99,
-	0x79, 0x60, 0xc5, 0x50, 0xb5, 0x62, 0x08, 0x57, 0x15, 0x24, 0x16, 0x25, 0xe6, 0x42, 0xcd, 0x50,
-	0x12, 0xe1, 0x12, 0x0a, 0x04, 0xe9, 0x0c, 0x00, 0x0b, 0x06, 0xa5, 0x16, 0x96, 0xa6, 0x16, 0x97,
-	0x28, 0x45, 0x71, 0x09, 0xa3, 0x88, 0x16, 0x17, 0xe4, 0xe7, 0x15, 0xa7, 0x0a, 0x39, 0x73, 0xb1,
-	0x41, 0x34, 0x4b, 0x30, 0x2a, 0x30, 0x6a, 0x70, 0x1b, 0xa9, 0xea, 0xe1, 0xf5, 0x94, 0x1e, 0x44,
-	0xbb, 0x13, 0xcb, 0x89, 0x7b, 0xf2, 0x0c, 0x41, 0x50, 0xad, 0x46, 0x2b, 0x18, 0xb9, 0x58, 0xc1,
-	0x86, 0x0b, 0xcd, 0x63, 0xe4, 0x62, 0x83, 0x28, 0x11, 0x32, 0x24, 0x60, 0x12, 0xa6, 0x1b, 0xa5,
-	0x8c, 0x48, 0xd1, 0x02, 0xf1, 0x80, 0x92, 0x6e, 0xd3, 0xe5, 0x27, 0x93, 0x99, 0xd4, 0x85, 0x54,
-	0xf5, 0xe1, 0x7a, 0xf5, 0x11, 0x01, 0x83, 0x1e, 0x44, 0x4e, 0x5e, 0x27, 0x1e, 0xc9, 0x31, 0x5e,
-	0x78, 0x24, 0xc7, 0xf8, 0xe0, 0x91, 0x1c, 0xe3, 0x84, 0xc7, 0x72, 0x0c, 0x17, 0x1e, 0xcb, 0x31,
-	0xdc, 0x78, 0x2c, 0xc7, 0x10, 0x65, 0x90, 0x9e, 0x59, 0x92, 0x51, 0x9a, 0xa4, 0x97, 0x9c, 0x9f,
-	0x8b, 0xd5, 0xa8, 0x0a, 0x24, 0x76, 0x49, 0x65, 0x41, 0x6a, 0x71, 0x12, 0x1b, 0x38, 0xbc, 0x8d,
-	0x01, 0x01, 0x00, 0x00, 0xff, 0xff, 0x1d, 0x09, 0x7b, 0x90, 0x1f, 0x02, 0x00, 0x00,
+	// 691 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0x55, 0x4f, 0x6f, 0xd3, 0x4e,
+	0x10, 0xcd, 0xa6, 0x6d, 0xf4, 0xeb, 0xb6, 0xd2, 0x0f, 0x96, 0x82, 0xa2, 0xd0, 0x9a, 0xca, 0x52,
+	0x29, 0x2a, 0xe0, 0xa5, 0x85, 0x13, 0x7f, 0x0e, 0x6d, 0x81, 0x4a, 0xfc, 0x91, 0x4a, 0x24, 0x84,
+	0xd4, 0x4b, 0xb5, 0x49, 0x17, 0xc7, 0x92, 0xed, 0x75, 0xbd, 0x6b, 0x20, 0xb2, 0x7c, 0x00, 0x71,
+	0xe3, 0x82, 0xc4, 0xbd, 0x1f, 0x05, 0x71, 0xec, 0xb1, 0x12, 0x1c, 0x38, 0x01, 0x6a, 0xf8, 0x20,
+	0x28, 0xbb, 0x9b, 0xd8, 0x6e, 0x5c, 0x92, 0x56, 0xdc, 0x36, 0xb3, 0xf3, 0x66, 0xde, 0xf3, 0xcc,
+	0xdb, 0xc0, 0xf3, 0x2f, 0x49, 0xe8, 0x35, 0x5b, 0xc4, 0xf1, 0xf1, 0x6e, 0x44, 0xc3, 0xb6, 0x15,
+	0x84, 0x4c, 0x30, 0x34, 0xd7, 0x64, 0xdc, 0x63, 0x3e, 0x89, 0x84, 0xd5, 0x4f, 0x48, 0x4f, 0xb5,
+	0x19, 0x9b, 0xd9, 0x4c, 0x66, 0xe2, 0xee, 0x49, 0x81, 0x6a, 0xb3, 0x36, 0x63, 0xb6, 0x4b, 0x31,
+	0x09, 0x1c, 0x4c, 0x7c, 0x9f, 0x09, 0x22, 0x1c, 0xe6, 0x73, 0x7d, 0xbb, 0x24, 0x4b, 0x72, 0xdc,
+	0x20, 0x9c, 0xaa, 0x5e, 0xf8, 0xd5, 0x72, 0x83, 0x0a, 0xb2, 0x8c, 0x03, 0x62, 0x3b, 0xbe, 0x4c,
+	0xd6, 0xb9, 0x17, 0x52, 0x56, 0x01, 0x09, 0x89, 0xd7, 0xab, 0x31, 0x97, 0xc6, 0x5d, 0xd6, 0x94,
+	0x88, 0xed, 0x1d, 0x22, 0x88, 0xba, 0x36, 0x67, 0x20, 0x7a, 0xd6, 0x2d, 0xbc, 0x29, 0x31, 0x75,
+	0xba, 0x1b, 0x51, 0x2e, 0xcc, 0x2d, 0x78, 0x2e, 0x17, 0xe5, 0x01, 0xf3, 0x39, 0x45, 0xeb, 0xb0,
+	0xa2, 0x6a, 0x57, 0xc1, 0x3c, 0xb8, 0x32, 0xb5, 0xb2, 0x60, 0xfd, 0x55, 0xb3, 0xa5, 0xe0, 0x6b,
+	0xe3, 0xfb, 0x3f, 0x2e, 0x95, 0xea, 0x1a, 0x6a, 0xbe, 0x80, 0x17, 0x65, 0xed, 0x0d, 0x2a, 0x9e,
+	0x68, 0x42, 0xf7, 0x89, 0x20, 0xba, 0x35, 0x9a, 0x85, 0x93, 0xc2, 0xf1, 0x28, 0x17, 0xc4, 0x0b,
+	0x64, 0x9b, 0xc9, 0x7a, 0x1a, 0x40, 0x35, 0xf8, 0x5f, 0x4f, 0x45, 0xb5, 0x2c, 0x2f, 0xfb, 0xbf,
+	0xcd, 0x08, 0xce, 0x16, 0x17, 0xd6, 0xec, 0x9f, 0xc3, 0x69, 0x37, 0x13, 0xd7, 0x1a, 0xae, 0x0e,
+	0xd1, 0x90, 0x2d, 0xa5, 0x95, 0xe4, 0xca, 0x98, 0x54, 0xeb, 0x59, 0x75, 0xdd, 0x22, 0x3d, 0x0f,
+	0x21, 0x4c, 0x67, 0xa5, 0x7b, 0x5e, 0x56, 0x3d, 0xb9, 0xd5, 0x1d, 0xac, 0xa5, 0x96, 0x48, 0x0f,
+	0xd6, 0xda, 0x24, 0x36, 0xd5, 0xd8, 0x7a, 0x06, 0x69, 0x7e, 0x06, 0x5a, 0xde, 0x40, 0x9f, 0x63,
+	0xe5, 0x8d, 0xfd, 0x03, 0x79, 0x68, 0x23, 0xc7, 0xbf, 0x2c, 0xf9, 0x2f, 0x0e, 0xe5, 0xaf, 0x38,
+	0xe5, 0x04, 0xfc, 0x04, 0x70, 0xee, 0xe8, 0x7c, 0xd6, 0xda, 0xa3, 0x8f, 0x1e, 0xc1, 0xf1, 0x66,
+	0xc8, 0x02, 0x3d, 0x76, 0x79, 0x46, 0xf3, 0x70, 0x4a, 0x50, 0x2f, 0xa0, 0x21, 0x11, 0x51, 0x48,
+	0xab, 0x63, 0xf2, 0x2a, 0x1b, 0xea, 0x2e, 0x4c, 0x2b, 0xf2, 0x9c, 0x1d, 0x47, 0xb4, 0xab, 0xe3,
+	0x6a, 0x61, 0x7a, 0xbf, 0x91, 0x09, 0xa7, 0x39, 0x73, 0xdc, 0xa7, 0xcc, 0xe1, 0x12, 0x3e, 0x21,
+	0xef, 0x73, 0x31, 0xb4, 0x04, 0xcf, 0xd8, 0x21, 0x7b, 0x2d, 0x5a, 0x9b, 0x34, 0x6c, 0x52, 0x5f,
+	0x10, 0x9b, 0x56, 0x2b, 0x32, 0x6f, 0x20, 0x6e, 0xce, 0x43, 0xe3, 0x38, 0x81, 0xea, 0x7b, 0xac,
+	0x74, 0x2a, 0x70, 0x42, 0xa6, 0xa0, 0x3d, 0x00, 0x2b, 0xca, 0x1e, 0x68, 0x79, 0xc8, 0x88, 0x06,
+	0xfd, 0x59, 0x5b, 0x39, 0x09, 0x44, 0xf5, 0x36, 0xaf, 0xbf, 0xfb, 0xfa, 0xfb, 0x53, 0x79, 0x11,
+	0x2d, 0xe0, 0x3e, 0x16, 0xa7, 0x6f, 0xc3, 0xd1, 0xd7, 0x03, 0x7d, 0x03, 0x70, 0x3a, 0xbb, 0x1c,
+	0xe8, 0xf6, 0x28, 0x3d, 0x8b, 0x4d, 0x5d, 0xbb, 0x73, 0x2a, 0xac, 0x26, 0xfe, 0x58, 0x12, 0x7f,
+	0x80, 0xd6, 0x87, 0x10, 0xcf, 0x3d, 0x6f, 0x38, 0xee, 0x6f, 0x4e, 0x82, 0xe3, 0xde, 0x55, 0x82,
+	0xbe, 0x00, 0xf8, 0x7f, 0xb6, 0xcb, 0xaa, 0xeb, 0x8e, 0xa6, 0xac, 0xd8, 0xde, 0xa3, 0x29, 0x3b,
+	0xc6, 0xb2, 0xe6, 0x2d, 0xa9, 0xcc, 0x42, 0xd7, 0x4e, 0xa2, 0x0c, 0xed, 0x95, 0xe1, 0xd9, 0x81,
+	0x15, 0x43, 0x77, 0x4f, 0xf8, 0x89, 0x73, 0xd6, 0xab, 0xdd, 0x3b, 0x25, 0x5a, 0x0b, 0xf9, 0x00,
+	0xa4, 0x92, 0xf7, 0x00, 0xbd, 0x05, 0x43, 0xb4, 0xd8, 0x54, 0x6c, 0xf7, 0xf5, 0x34, 0xda, 0x05,
+	0xc3, 0xea, 0x3a, 0x3b, 0xc1, 0x71, 0xc6, 0xc5, 0x09, 0x8e, 0x7b, 0xa6, 0x4d, 0x70, 0x9c, 0xf5,
+	0x67, 0x82, 0xe3, 0xa3, 0x36, 0x4c, 0xd6, 0x1e, 0xed, 0x1f, 0x1a, 0xe0, 0xe0, 0xd0, 0x00, 0xbf,
+	0x0e, 0x0d, 0xf0, 0xb1, 0x63, 0x94, 0x0e, 0x3a, 0x46, 0xe9, 0x7b, 0xc7, 0x28, 0x6d, 0xdd, 0xb0,
+	0x1d, 0xd1, 0x8a, 0x1a, 0x56, 0x93, 0x79, 0x85, 0x34, 0xdf, 0x64, 0xce, 0xa2, 0x1d, 0x50, 0xde,
+	0xa8, 0xc8, 0xbf, 0xc9, 0x9b, 0x7f, 0x02, 0x00, 0x00, 0xff, 0xff, 0x96, 0x18, 0xe7, 0xc8, 0xf5,
+	0x07, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -157,6 +500,12 @@ const _ = grpc.SupportPackageIsVersion4
 type QueryClient interface {
 	// Parameters queries the parameters of the module.
 	Params(ctx context.Context, in *QueryParamsRequest, opts ...grpc.CallOption) (*QueryParamsResponse, error)
+	// Queries a LocationData by index.
+	LocationData(ctx context.Context, in *QueryGetLocationDataRequest, opts ...grpc.CallOption) (*QueryGetLocationDataResponse, error)
+	// Queries a list of LocationData items.
+	LocationDataAll(ctx context.Context, in *QueryAllLocationDataRequest, opts ...grpc.CallOption) (*QueryAllLocationDataResponse, error)
+	// Queries a list of GetLocationByData items.
+	GetLocationByData(ctx context.Context, in *QueryGetLocationByDataRequest, opts ...grpc.CallOption) (*QueryGetLocationByDataResponse, error)
 }
 
 type queryClient struct {
@@ -176,10 +525,43 @@ func (c *queryClient) Params(ctx context.Context, in *QueryParamsRequest, opts .
 	return out, nil
 }
 
+func (c *queryClient) LocationData(ctx context.Context, in *QueryGetLocationDataRequest, opts ...grpc.CallOption) (*QueryGetLocationDataResponse, error) {
+	out := new(QueryGetLocationDataResponse)
+	err := c.cc.Invoke(ctx, "/cosmonaut.farmchain.farmchain.Query/LocationData", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *queryClient) LocationDataAll(ctx context.Context, in *QueryAllLocationDataRequest, opts ...grpc.CallOption) (*QueryAllLocationDataResponse, error) {
+	out := new(QueryAllLocationDataResponse)
+	err := c.cc.Invoke(ctx, "/cosmonaut.farmchain.farmchain.Query/LocationDataAll", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *queryClient) GetLocationByData(ctx context.Context, in *QueryGetLocationByDataRequest, opts ...grpc.CallOption) (*QueryGetLocationByDataResponse, error) {
+	out := new(QueryGetLocationByDataResponse)
+	err := c.cc.Invoke(ctx, "/cosmonaut.farmchain.farmchain.Query/GetLocationByData", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // QueryServer is the server API for Query service.
 type QueryServer interface {
 	// Parameters queries the parameters of the module.
 	Params(context.Context, *QueryParamsRequest) (*QueryParamsResponse, error)
+	// Queries a LocationData by index.
+	LocationData(context.Context, *QueryGetLocationDataRequest) (*QueryGetLocationDataResponse, error)
+	// Queries a list of LocationData items.
+	LocationDataAll(context.Context, *QueryAllLocationDataRequest) (*QueryAllLocationDataResponse, error)
+	// Queries a list of GetLocationByData items.
+	GetLocationByData(context.Context, *QueryGetLocationByDataRequest) (*QueryGetLocationByDataResponse, error)
 }
 
 // UnimplementedQueryServer can be embedded to have forward compatible implementations.
@@ -188,6 +570,15 @@ type UnimplementedQueryServer struct {
 
 func (*UnimplementedQueryServer) Params(ctx context.Context, req *QueryParamsRequest) (*QueryParamsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Params not implemented")
+}
+func (*UnimplementedQueryServer) LocationData(ctx context.Context, req *QueryGetLocationDataRequest) (*QueryGetLocationDataResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method LocationData not implemented")
+}
+func (*UnimplementedQueryServer) LocationDataAll(ctx context.Context, req *QueryAllLocationDataRequest) (*QueryAllLocationDataResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method LocationDataAll not implemented")
+}
+func (*UnimplementedQueryServer) GetLocationByData(ctx context.Context, req *QueryGetLocationByDataRequest) (*QueryGetLocationByDataResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetLocationByData not implemented")
 }
 
 func RegisterQueryServer(s grpc1.Server, srv QueryServer) {
@@ -212,6 +603,60 @@ func _Query_Params_Handler(srv interface{}, ctx context.Context, dec func(interf
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Query_LocationData_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryGetLocationDataRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).LocationData(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/cosmonaut.farmchain.farmchain.Query/LocationData",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).LocationData(ctx, req.(*QueryGetLocationDataRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Query_LocationDataAll_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryAllLocationDataRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).LocationDataAll(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/cosmonaut.farmchain.farmchain.Query/LocationDataAll",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).LocationDataAll(ctx, req.(*QueryAllLocationDataRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Query_GetLocationByData_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryGetLocationByDataRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).GetLocationByData(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/cosmonaut.farmchain.farmchain.Query/GetLocationByData",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).GetLocationByData(ctx, req.(*QueryGetLocationByDataRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Query_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "cosmonaut.farmchain.farmchain.Query",
 	HandlerType: (*QueryServer)(nil),
@@ -219,6 +664,18 @@ var _Query_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Params",
 			Handler:    _Query_Params_Handler,
+		},
+		{
+			MethodName: "LocationData",
+			Handler:    _Query_LocationData_Handler,
+		},
+		{
+			MethodName: "LocationDataAll",
+			Handler:    _Query_LocationDataAll_Handler,
+		},
+		{
+			MethodName: "GetLocationByData",
+			Handler:    _Query_GetLocationByData_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -281,6 +738,248 @@ func (m *QueryParamsResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
+func (m *QueryGetLocationDataRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryGetLocationDataRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryGetLocationDataRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Location) > 0 {
+		i -= len(m.Location)
+		copy(dAtA[i:], m.Location)
+		i = encodeVarintQuery(dAtA, i, uint64(len(m.Location)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.Timestamp) > 0 {
+		i -= len(m.Timestamp)
+		copy(dAtA[i:], m.Timestamp)
+		i = encodeVarintQuery(dAtA, i, uint64(len(m.Timestamp)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *QueryGetLocationDataResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryGetLocationDataResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryGetLocationDataResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	{
+		size, err := m.LocationData.MarshalToSizedBuffer(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarintQuery(dAtA, i, uint64(size))
+	}
+	i--
+	dAtA[i] = 0xa
+	return len(dAtA) - i, nil
+}
+
+func (m *QueryAllLocationDataRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryAllLocationDataRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryAllLocationDataRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.Pagination != nil {
+		{
+			size, err := m.Pagination.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintQuery(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *QueryAllLocationDataResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryAllLocationDataResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryAllLocationDataResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.Pagination != nil {
+		{
+			size, err := m.Pagination.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintQuery(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.LocationData) > 0 {
+		for iNdEx := len(m.LocationData) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.LocationData[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintQuery(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0xa
+		}
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *QueryGetLocationByDataRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryGetLocationByDataRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryGetLocationByDataRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.GrowthPercentage) > 0 {
+		i -= len(m.GrowthPercentage)
+		copy(dAtA[i:], m.GrowthPercentage)
+		i = encodeVarintQuery(dAtA, i, uint64(len(m.GrowthPercentage)))
+		i--
+		dAtA[i] = 0x32
+	}
+	if len(m.SoilMoisture) > 0 {
+		i -= len(m.SoilMoisture)
+		copy(dAtA[i:], m.SoilMoisture)
+		i = encodeVarintQuery(dAtA, i, uint64(len(m.SoilMoisture)))
+		i--
+		dAtA[i] = 0x2a
+	}
+	if len(m.Humidity) > 0 {
+		i -= len(m.Humidity)
+		copy(dAtA[i:], m.Humidity)
+		i = encodeVarintQuery(dAtA, i, uint64(len(m.Humidity)))
+		i--
+		dAtA[i] = 0x22
+	}
+	if len(m.Temperature) > 0 {
+		i -= len(m.Temperature)
+		copy(dAtA[i:], m.Temperature)
+		i = encodeVarintQuery(dAtA, i, uint64(len(m.Temperature)))
+		i--
+		dAtA[i] = 0x1a
+	}
+	if len(m.Crop) > 0 {
+		i -= len(m.Crop)
+		copy(dAtA[i:], m.Crop)
+		i = encodeVarintQuery(dAtA, i, uint64(len(m.Crop)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.Timestamp) > 0 {
+		i -= len(m.Timestamp)
+		copy(dAtA[i:], m.Timestamp)
+		i = encodeVarintQuery(dAtA, i, uint64(len(m.Timestamp)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *QueryGetLocationByDataResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryGetLocationByDataResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryGetLocationByDataResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	return len(dAtA) - i, nil
+}
+
 func encodeVarintQuery(dAtA []byte, offset int, v uint64) int {
 	offset -= sovQuery(v)
 	base := offset
@@ -309,6 +1008,108 @@ func (m *QueryParamsResponse) Size() (n int) {
 	_ = l
 	l = m.Params.Size()
 	n += 1 + l + sovQuery(uint64(l))
+	return n
+}
+
+func (m *QueryGetLocationDataRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Timestamp)
+	if l > 0 {
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	l = len(m.Location)
+	if l > 0 {
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	return n
+}
+
+func (m *QueryGetLocationDataResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = m.LocationData.Size()
+	n += 1 + l + sovQuery(uint64(l))
+	return n
+}
+
+func (m *QueryAllLocationDataRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Pagination != nil {
+		l = m.Pagination.Size()
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	return n
+}
+
+func (m *QueryAllLocationDataResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if len(m.LocationData) > 0 {
+		for _, e := range m.LocationData {
+			l = e.Size()
+			n += 1 + l + sovQuery(uint64(l))
+		}
+	}
+	if m.Pagination != nil {
+		l = m.Pagination.Size()
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	return n
+}
+
+func (m *QueryGetLocationByDataRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Timestamp)
+	if l > 0 {
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	l = len(m.Crop)
+	if l > 0 {
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	l = len(m.Temperature)
+	if l > 0 {
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	l = len(m.Humidity)
+	if l > 0 {
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	l = len(m.SoilMoisture)
+	if l > 0 {
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	l = len(m.GrowthPercentage)
+	if l > 0 {
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	return n
+}
+
+func (m *QueryGetLocationByDataResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
 	return n
 }
 
@@ -430,6 +1231,701 @@ func (m *QueryParamsResponse) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryGetLocationDataRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryGetLocationDataRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryGetLocationDataRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Timestamp", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Timestamp = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Location", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Location = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryGetLocationDataResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryGetLocationDataResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryGetLocationDataResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field LocationData", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if err := m.LocationData.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryAllLocationDataRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryAllLocationDataRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryAllLocationDataRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Pagination", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Pagination == nil {
+				m.Pagination = &query.PageRequest{}
+			}
+			if err := m.Pagination.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryAllLocationDataResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryAllLocationDataResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryAllLocationDataResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field LocationData", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.LocationData = append(m.LocationData, LocationData{})
+			if err := m.LocationData[len(m.LocationData)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Pagination", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Pagination == nil {
+				m.Pagination = &query.PageResponse{}
+			}
+			if err := m.Pagination.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryGetLocationByDataRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryGetLocationByDataRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryGetLocationByDataRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Timestamp", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Timestamp = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Crop", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Crop = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Temperature", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Temperature = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Humidity", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Humidity = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 5:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field SoilMoisture", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.SoilMoisture = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 6:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field GrowthPercentage", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.GrowthPercentage = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryGetLocationByDataResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryGetLocationByDataResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryGetLocationByDataResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
 		default:
 			iNdEx = preIndex
 			skippy, err := skipQuery(dAtA[iNdEx:])

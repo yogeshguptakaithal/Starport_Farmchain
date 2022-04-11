@@ -5,6 +5,7 @@ import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "farmchain/params.proto";
+import "farmchain/location_data.proto";
 // this line is used by starport scaffolding # 1
 
 option go_package = "github.com/cosmonaut/farmchain/x/farmchain/types";
@@ -15,7 +16,22 @@ service Query {
   rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
     option (google.api.http).get = "/cosmonaut/farmchain/farmchain/params";
   }
-  // this line is used by starport scaffolding # 2
+  // Queries a LocationData by index.
+	rpc LocationData(QueryGetLocationDataRequest) returns (QueryGetLocationDataResponse) {
+		option (google.api.http).get = "/cosmonaut/farmchain/farmchain/location_data/{timestamp}/{location}";
+	}
+
+	// Queries a list of LocationData items.
+	rpc LocationDataAll(QueryAllLocationDataRequest) returns (QueryAllLocationDataResponse) {
+		option (google.api.http).get = "/cosmonaut/farmchain/farmchain/location_data";
+	}
+
+// Queries a list of GetLocationByData items.
+	rpc GetLocationByData(QueryGetLocationByDataRequest) returns (QueryGetLocationByDataResponse) {
+		option (google.api.http).get = "/cosmonaut/farmchain/farmchain/get_location_by_data/{timestamp}/{crop}/{temperature}/{humidity}/{soilMoisture}/{growthPercentage}";
+	}
+
+// this line is used by starport scaffolding # 2
 }
 
 // QueryParamsRequest is request type for the Query/Params RPC method.
@@ -25,6 +41,41 @@ message QueryParamsRequest {}
 message QueryParamsResponse {
   // params holds all the parameters of this module.
   Params params = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryGetLocationDataRequest {
+	  string timestamp = 1;
+  string location = 2;
+
+}
+
+message QueryGetLocationDataResponse {
+	LocationData locationData = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllLocationDataRequest {
+	cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllLocationDataResponse {
+	repeated LocationData locationData = 1 [(gogoproto.nullable) = false];
+	cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryGetLocationByDataRequest {
+  string timestamp = 1;
+  string crop = 2;
+  string temperature = 3;
+  string humidity = 4;
+  string soilMoisture = 5;
+  string growthPercentage = 6;
+
+  cosmos.base.query.v1beta1.PageRequest pagination = 7;
+}
+
+message QueryGetLocationByDataResponse {
+  repeated string location = 1;
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
 // this line is used by starport scaffolding # 3

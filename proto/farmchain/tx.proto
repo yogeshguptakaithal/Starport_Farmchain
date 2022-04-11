@@ -1,13 +1,50 @@
 syntax = "proto3";
 package cosmonaut.farmchain.farmchain;
 
+import "farmchain/location_data.proto";
 // this line is used by starport scaffolding # proto/tx/import
 
 option go_package = "github.com/cosmonaut/farmchain/x/farmchain/types";
 
 // Msg defines the Msg service.
 service Msg {
-    // this line is used by starport scaffolding # proto/tx/rpc
+      rpc CreateLocationData(MsgCreateLocationData) returns (MsgCreateLocationDataResponse);
+  rpc UpdateLocationData(MsgUpdateLocationData) returns (MsgUpdateLocationDataResponse);
+  rpc DeleteLocationData(MsgDeleteLocationData) returns (MsgDeleteLocationDataResponse);
+// this line is used by starport scaffolding # proto/tx/rpc
 }
+
+message MsgCreateLocationData {
+  string creator = 1;
+  string timestamp = 2;
+  string location = 3;
+
+  string temperature = 4;
+  string humidity = 5;
+  string soilMoisture = 6;
+  string growthPercentage = 7;
+  string crop = 8;
+}
+message MsgCreateLocationDataResponse {}
+
+message MsgUpdateLocationData {
+  string creator = 1;
+  string timestamp = 2;
+  string location = 3;
+
+  string temperature = 4;
+  string humidity = 5;
+  string soilMoisture = 6;
+  string growthPercentage = 7;
+  string crop = 8;
+}
+message MsgUpdateLocationDataResponse {}
+
+message MsgDeleteLocationData {
+  string creator = 1;
+  string timestamp = 2;
+  string location = 3;
+}
+message MsgDeleteLocationDataResponse {}
 
 // this line is used by starport scaffolding # proto/tx/message
